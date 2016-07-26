@@ -30,11 +30,14 @@ This article helped me with zeroing out some issues that I was having.
 read -p "Hit ENTER if you're ready to continue ..."
 
 echo '
-Cleanup
--------'
+Cleanup Previous Attempts
+-------------------------'
+sudo umount /mnt/archiso
 sudo rm -r customiso
 sudo rm custom-archlinux.iso
-sudo rm airootfs.md5
+sudo rm -r /mnt/archiso
+echo 'DONE
+'
 
 echo '
 All Mounted Volumes
@@ -71,63 +74,89 @@ echo 'DONE
 '
 
 echo '
-Creating File System
---------------------'
-sudo mkfs.vfat -F 32 $uservolume
-echo 'DONE
-'
-
-# TODO DEBUG SECTION START
-echo '
 Extracting ISO
 --------------'
-sudo umount /mnt/archiso
-sudo rm -r /mnt/archiso
 sudo mkdir /mnt/archiso
 sudo mount -t iso9660 -o loop archlinux.iso /mnt/archiso
 sudo cp -a /mnt/archiso ~/customiso
 echo 'DONE
 '
 
-
-
+echo '
+Installing Prerequesite Tools
+-----------------------------'
+sudo apt-get install squashfs-tools
+echo 'DONE
+'
 
 echo '
-Reassembling ISO
------------------'
+Disassembling x86_64
+--------------------'
 cd ~/customiso/arch/x86_64
-sudo apt-get install squashfs-tools
 sudo unsquashfs airootfs.sfs
 echo 'DONE
 '
-sudo rm airootfs.sfs
-sudo mksquashfs squashfs-root airootfs.sfs
-sudo rm -r squashfs-root
-sudo sh -c "md5sum airootfs.sfs > airootfs.md5"
 
 echo '
-Reassembling ISO
------------------'
+Disassembling i686
+------------------'
 cd ~/customiso/arch/i686
 sudo unsquashfs airootfs.sfs
 echo 'DONE
 '
+
+echo '
+Injecting Setup Script
+----------------------
+(Standard setup script will be used on default.)'
+read -r -p 'Do you want to provide your own "one-time-setup.sh" file?(y/n): ' response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+  echo '[!] Place your custom "one-time-setup.sh" script file in your base directory.'
+  read -p "Hit ENTER if you're ready to continue ..."
+  sudo cp one-time-setup.sh ~/customiso/arch/x86_64/etc/profile.d/one-time-setup.sh
+  sudo cp one-time-setup.sh ~/customiso/arch/i686/etc/profile.d/one-time-setup.sh
+else
+  echo '#!/bin/bash
+  clear
+  bash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)" << ~/customiso/arch/x86_64/etc/profile.d/
+  bash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)" << ~/customiso/arch/i686/etc/profile.d/'
+fi
+echo 'DONE
+'
+
+echo '
+Reassembling x86_64
+-------------------'
+cd ~/customiso/arch/x86_64
 sudo rm airootfs.sfs
 sudo mksquashfs squashfs-root airootfs.sfs
 sudo rm -r squashfs-root
 sudo sh -c "md5sum airootfs.sfs > airootfs.md5"
+echo 'DONE
+'
 
+echo '
+Reassembling i686
+-----------------'
+cd ~/customiso/arch/x86_64
+sudo rm airootfs.sfs
+sudo mksquashfs squashfs-root airootfs.sfs
+sudo rm -r squashfs-root
+sudo sh -c "md5sum airootfs.sfs > airootfs.md5"
+echo 'DONE
+'
 
-
-
-
+echo '
+Creating New Bootable ISO
+-------------------------'
 cd
 cd customiso
 sudo genisoimage -l -r -J -V "ARCH_201607" -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -c isolinux/boot.cat -o ../custom-archlinux.iso ./
 cd
 sudo isohybrid custom-archlinux.iso
-
-# TODO DEBUG SECTION END
+echo 'DONE
+'
 
 echo '
 Flashing ISO on USB-drive
@@ -141,8 +170,12 @@ sudo dd bs=1M if=custom-archlinux.iso of=$uservolume && sync
 echo 'DONE
 '
 
-#sudo rm -r customiso
-
+echo '
+Cleanup
+-------'
+sudo rm -r customiso
+echo 'DONE
+'
 
 # Disable showing all commands
 set +x
