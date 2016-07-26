@@ -117,10 +117,14 @@ then
   sudo cp one-time-setup.sh ~/customiso/arch/x86_64/etc/profile.d/one-time-setup.sh
   sudo cp one-time-setup.sh ~/customiso/arch/i686/etc/profile.d/one-time-setup.sh
 else
-  echo '#!/bin/bash
+  cd ~/customiso/arch/x86_64
+  sudo echo '#!/bin/bash
   clear
-  bash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)" << ~/customiso/arch/x86_64/etc/profile.d/
-  bash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)" << ~/customiso/arch/i686/etc/profile.d/'
+  bash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)' > /etc/profile.d/one-time-setup.sh
+  cd ~/customiso/arch/i686
+  sudo echo '#!/bin/bash
+  clear
+  bash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)' > /etc/profile.d/one-time-setup.sh
 fi
 echo 'DONE
 '
@@ -139,7 +143,7 @@ echo 'DONE
 echo '
 Reassembling i686
 -----------------'
-cd ~/customiso/arch/x86_64
+cd ~/customiso/arch/i686
 sudo rm airootfs.sfs
 sudo mksquashfs squashfs-root airootfs.sfs
 sudo rm -r squashfs-root
@@ -148,11 +152,17 @@ echo 'DONE
 '
 
 echo '
-Creating New Bootable ISO
--------------------------'
+Creating New Custom ISO
+-----------------------'
 cd
 cd customiso
 sudo genisoimage -l -r -J -V "ARCH_201607" -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -c isolinux/boot.cat -o ../custom-archlinux.iso ./
+echo 'DONE
+'
+
+echo '
+Creating New Custom ISO
+-----------------------'
 cd
 sudo isohybrid custom-archlinux.iso
 echo 'DONE
