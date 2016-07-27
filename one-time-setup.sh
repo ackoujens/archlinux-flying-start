@@ -82,7 +82,7 @@ echo 'DONE
 echo '
 Updating System Clock
 ---------------------'
-timedatectl set-timezone
+timedatectl set-timezone Europe/Brussels
 timedatectl set-ntp true
 timedatectl status
 echo 'DONE
