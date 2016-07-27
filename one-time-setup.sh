@@ -53,11 +53,12 @@ echo 'DONE
 echo '
 Disabling DHCP
 --------------'
-systemctl stop dhcpcd@enp4s0.service
-systemctl disable dhcpcd@enp4s0.service
-rm /var/lib/dhcpcd/dhcpcd-enp4s0.lease
+INTERFACE = "$(ip add | grep ‘2: e’ | cut -c4-9)"
+systemctl stop dhcpcd@${INTERFACE}.service
+systemctl disable dhcpcd@${INTERFACE}.service
+rm /var/lib/dhcpcd/dhcpcd-${INTERFACE}.lease
 rm /etc/dhcpcd.duid
-ip link set enp4s0 down
+ip link set ${INTERFACE} down
 echo 'DONE
 '
 
