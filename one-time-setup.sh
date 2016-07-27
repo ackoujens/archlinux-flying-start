@@ -66,13 +66,13 @@ echo '
 Enabling Static IP
 ------------------'
 echo "Description='Raspberry PI Static ethernet connection'
-Interface=enp4s0
+Interface=${INTERFACE}
 Connection=ethernet
 IP=static
 Address=('192.168.1.40/24')
 Gateway='192.168.1.1'
 DNS=('8.8.8.8' '8.8.4.4')
-SkipNoCarrier=yes" << /etc/netctl/home
+SkipNoCarrier=yes" > /etc/netctl/home
 netctl start home
 echo 'DONE
 '
