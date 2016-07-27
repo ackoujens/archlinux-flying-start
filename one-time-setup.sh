@@ -35,8 +35,9 @@ echo 'DONE
 '
 
 echo '
-Verifying Boot Mode
--------------------'
+Checking For UEFI Boot Mode
+---------------------------
+Additional modifications are needed if this command returns a positive feedback'
 ls /sys/firmware/efi/efivars
 echo 'DONE
 '
@@ -45,6 +46,7 @@ echo '
 Setting Keyboard Layout
 -----------------------'
 loadkeys azerty
+localectl set-keymap --no-convert azerty
 echo 'DONE
 '
 
