@@ -73,7 +73,9 @@ Address=('192.168.1.40/24')
 Gateway='192.168.1.1'
 DNS=('8.8.8.8' '8.8.4.4')
 SkipNoCarrier=yes" > /etc/netctl/home
+netctl stop-all
 netctl start home
+netctl enable home
 echo 'DONE
 '
 
