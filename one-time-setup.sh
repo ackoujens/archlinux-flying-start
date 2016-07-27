@@ -53,7 +53,7 @@ echo 'DONE
 echo '
 Disabling DHCP
 --------------'
-INTERFACE = "$(ip add | grep ‘2: e’ | cut -c4-9)"
+INTERFACE = "$(ip add | grep '2: e' | cut -c4-9)"
 systemctl stop dhcpcd@${INTERFACE}.service
 systemctl disable dhcpcd@${INTERFACE}.service
 rm /var/lib/dhcpcd/dhcpcd-${INTERFACE}.lease
