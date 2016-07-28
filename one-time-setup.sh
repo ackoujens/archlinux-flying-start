@@ -89,8 +89,9 @@ echo 'DONE
 '
 
 echo '
-Repartitioning SD card
-----------------------'
+Repartitioning Drive
+--------------------'
+uservolume="/dev/sda"
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk $uservolume
   o # clear the in memory partition table
   n # new partition
