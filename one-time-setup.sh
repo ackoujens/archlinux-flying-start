@@ -134,12 +134,11 @@ partprobe
 echo 'DONE
 '
 
-# TODO SWAP / Mountpoints
 echo '
 Creating Filesystem
 -------------------'
 echo "[root] ${uservolume}3 => ext4"
-sudo mkfs.ext4 ${uservolume}3 create filesystem
+sudo mkfs.ext4 ${uservolume}3
 #mkdir root # create root directory
 sudo mount ${uservolume}3 /mnt # mount root partition
 
@@ -158,7 +157,7 @@ echo '
 Selecting Mirrors
 -----------------'
 # /etc/pacman.d/mirrorlist
-echo 'DONE
+echo 'SKIPPED
 '
 
 # echo '
