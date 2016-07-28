@@ -105,10 +105,17 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk $uservolume
   p # primary partition
   2 # partion number 2
     # default, start immediately after preceding partition
+  +1G # default, extend partition to end of disk
+  t # change partition systemid
+  2 # selecting second partition
+  82 # ... to W95 FAT32 (LBA)
+  n # new partition
+  p # primary partition
+  3 # partion number 3
+    # default, start immediately after preceding partition
     # default, extend partition to end of disk
   p # display partition table
   w # write the partition table
-  q # and we're done
 EOF
 partprobe
 echo 'DONE
@@ -118,15 +125,19 @@ echo 'DONE
 echo '
 Creating Filesystem
 -------------------'
-echo "[root] ${uservolume}1 => ext4"
-sudo mkfs.ext4 # create filesystem
-#mkdir root # create root directory
-sudo mount ${uservolume}1 /mnt # mount root partition
-
-echo "[boot] ${uservolume}2 => vfat"
+echo "[boot] ${uservolume}1 => vfat"
 sudo mkfs.vfat ${uservolume}1 # create filesystem
 #mkdir boot # create boot directory
-sudo mount ${uservolume}2 /mnt/boot # mount boot partition
+sudo mount ${uservolume}1 /mnt/boot # mount boot partition
+
+echo "[swap] ${uservolume}2"
+mkswap /dev/sda2
+swapon /dev/sda2
+
+echo "[root] ${uservolume}3 => ext4"
+sudo mkfs.ext4 ${uservolume}3# create filesystem
+#mkdir root # create root directory
+sudo mount ${uservolume}3 /mnt # mount root partition
 echo 'DONE
 '
 
@@ -217,7 +228,7 @@ echo 'DONE
 echo '
 Cleanup
 -------'
-sudo rm $0
+#sudo rm $0
 echo 'DONE
 '
 
@@ -225,8 +236,8 @@ echo '
 Reboot
 --------'
 exit
-umount -R /mnt
-reboot
+#umount -R /mnt
+#reboot
 echo 'DONE
 '
 
