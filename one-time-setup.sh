@@ -213,7 +213,7 @@ echo '
 Root Password
 --------'
 #passwd
-echo 'DONE
+echo 'SKIPPED
 '
 
 echo '
@@ -226,19 +226,12 @@ echo 'DONE
 '
 
 echo '
-Cleanup
--------'
-#sudo rm $0
-echo 'DONE
-'
-
-echo '
 Reboot
 --------'
 exit
 #umount -R /mnt
 #reboot
-echo 'DONE
+echo 'SKIPPED
 '
 
 # Disable showing all commands
