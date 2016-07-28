@@ -118,15 +118,15 @@ echo 'DONE
 echo '
 Creating Filesystem
 -------------------'
-echo "[boot] ${uservolume}1 => vfat"
-sudo mkfs.vfat ${uservolume}1 # create filesystem
-mkdir boot # create boot directory
-sudo mount ${uservolume}1 boot # mount boot partition
-
-echo "[root] ${uservolume}2 => ext4"
+echo "[root] ${uservolume}1 => ext4"
 sudo mkfs.ext4 # create filesystem
-mkdir root # create root directory
-sudo mount ${uservolume}2 root # mount root partition
+#mkdir root # create root directory
+sudo mount ${uservolume}1 /mnt # mount root partition
+
+echo "[boot] ${uservolume}2 => vfat"
+sudo mkfs.vfat ${uservolume}1 # create filesystem
+#mkdir boot # create boot directory
+sudo mount ${uservolume}2 /mnt/boot # mount boot partition
 echo 'DONE
 '
 
