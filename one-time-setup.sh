@@ -51,9 +51,21 @@ echo 'DONE
 '
 
 echo '
+Current Connection
+------------------'
+INTERFACE="$(ip addr | grep '2: e' | cut -c4-9)"
+CURRENTIP="$(ip addr show ${INTERFACE} | grep "inet " | awk '{print $2}' | cut -d/ -f1)"
+CURRENTIPWITHCLASS="$(ip addr show ${INTERFACE} | grep "inet " | awk '{print $2}')"
+CURRENTIPNUM="$(ip addr show ${INTERFACE} | grep "inet " | awk '{print $2}' | cut -d/ -f1) | cut -d. -f4"
+CURRENTIPCLASS="$(ip addr show ${INTERFACE} | grep "inet " | awk '{print $2}' | cut -d/ -f2)"
+CURRENTIPWITHOUTNUM="$(ip addr show ${INTERFACE} | grep "inet " | awk '{print $2}' | cut -d/ -f1 | cut -d. -f1-3)"
+echo "Your current IP: ${CURRENTIP}"
+echo 'DONE
+'
+
+echo '
 Disabling DHCP
 --------------'
-INTERFACE="$(ip addr | grep '2: e' | cut -c4-9)"
 systemctl stop dhcpcd@${INTERFACE}.service
 systemctl disable dhcpcd@${INTERFACE}.service
 rm /var/lib/dhcpcd/dhcpcd-${INTERFACE}.lease
@@ -69,8 +81,8 @@ echo "Description='Raspberry PI Static ethernet connection'
 Interface=${INTERFACE}
 Connection=ethernet
 IP=static
-Address=('192.168.1.40/24')
-Gateway='192.168.1.1'
+Address=('${CURRENTIPWITHOUTNUM}.40/${CURRENTIPCLASS}')
+Gateway='${CURRENTIPWITHOUTNUM}.1'
 DNS=('8.8.8.8' '8.8.4.4')
 SkipNoCarrier=yes" > /etc/netctl/home
 netctl stop-all
