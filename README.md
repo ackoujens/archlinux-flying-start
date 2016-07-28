@@ -3,16 +3,16 @@ Rush into your new Arch Linux project without those annoying preliminary steps.
 This script will install arch linux on your computer by using a USB drive.
 
 ## Installation Guide Checklist - Implemented and Tested
-[ ] 1 Pre-installation
+[X] 1 Pre-installation
 [X] 1.1 Verify the boot mode
 [X] 1.2 Set the keyboard layout
 [X] 1.3 Connect to the Internet
-[ ] 1.4 Update the system clock
+[X] 1.4 Update the system clock
 [X] 1.5 Partition the disks
-[ ] 1.6 Format the partitions
-[ ] 1.7 Mount the partitions
+[X] 1.6 Format the partitions
+[X] 1.7 Mount the partitions
 [ ] 2 Installation
-[ ] 2.1 Select the mirrors
+[X] 2.1 Select the mirrors
 [ ] 2.2 Install the base packages
 [ ] 3 Configure the system
 [ ] 3.1 Fstab
