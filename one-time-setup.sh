@@ -139,13 +139,13 @@ echo '
 Creating Filesystem
 -------------------'
 echo "[root] ${uservolume}3 => ext4"
-sudo mkfs.ext4 ${uservolume}3# create filesystem
+sudo mkfs.ext4 ${uservolume}3 create filesystem
 #mkdir root # create root directory
 sudo mount ${uservolume}3 /mnt # mount root partition
 
 echo "[boot] ${uservolume}1 => vfat"
 sudo mkfs.vfat ${uservolume}1 # create filesystem
-#mkdir /mnt/boot # create boot directory
+mkdir /mnt/boot # create boot directory
 sudo mount ${uservolume}1 /mnt/boot # mount boot partition
 
 echo "[swap] ${uservolume}2"
