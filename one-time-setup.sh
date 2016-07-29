@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Expanding scrollback buffer
+fbcon=scrollback:2024k
 clear
 
 echo '
