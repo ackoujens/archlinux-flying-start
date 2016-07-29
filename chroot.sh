@@ -49,8 +49,9 @@ echo 'SKIPPED
 echo '
 Boot Loader
 -----------'
-pacman -S grub
+pacman -S --noconfirm grub
 grub-install --target=i386-pc /dev/sdx
 grub-mkconfig -o /boot/grub/grub.cfg
 echo 'DONE
 '
+exit

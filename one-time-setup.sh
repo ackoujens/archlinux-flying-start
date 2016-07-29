@@ -183,18 +183,18 @@ echo 'DONE
 echo '
 Changing Root To New System
 ---------------------------'
-arch-chroot /mnt
-chroot /mnt /bin/bash -c "su - -c (curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/chroot.sh)"
+curl https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/chroot.sh > /etc/chroot.sh
+chmod +x /etc/chroot.sh
+arch-chroot /mnt /bin/bash -c "./chroot.sh"
 echo 'DONE
 '
 
 echo '
-Reboot
-------'
-# #exit
-# #umount -R /mnt
-# #reboot
-# echo 'SKIPPED
+Cleanup
+-------'
+rm /etc/chroot.sh
+umount -R /mnt
+echo 'SKIPPED
 # '
 
 # Disable showing all commands
@@ -202,3 +202,4 @@ set +x
 
 echo "
 +++ That's all folks! Enjoy! +++"
+#reboot
