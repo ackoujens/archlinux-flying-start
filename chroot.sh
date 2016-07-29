@@ -11,7 +11,6 @@ echo 'DONE
 echo '
 Locale
 ------'
-sudo /etc/locale.gen
 rm /etc/locale.gen
 echo "en_US ISO-8859-1
 en_US.UTF-8 UTF-8" > /etc/locale.gen
@@ -54,4 +53,4 @@ grub-install --target=i386-pc /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 echo 'DONE
 '
-exit
+#exit

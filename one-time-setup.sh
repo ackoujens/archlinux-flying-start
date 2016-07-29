@@ -192,8 +192,8 @@ echo 'DONE
 echo '
 Cleanup
 -------'
-#rm /etc/chroot.sh
-#umount -R /mnt
+rm /etc/chroot.sh
+umount -R /mnt
 echo 'SKIPPED
 # '
 
@@ -202,4 +202,4 @@ set +x
 
 echo "
 +++ That's all folks! Enjoy! +++"
-#reboot
+reboot

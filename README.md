@@ -11,20 +11,20 @@ This script will install arch linux on your computer by using a USB drive.
 [X] 1.5 Partition the disks
 [X] 1.6 Format the partitions
 [X] 1.7 Mount the partitions
-[ ] 2 Installation
+[X] 2 Installation
 [X] 2.1 Select the mirrors
 [X] 2.2 Install the base packages
 [ ] 3 Configure the system
 [X] 3.1 Fstab
 [X] 3.2 Chroot
-[ ] 3.3 Time zone
-[ ] 3.4 Locale
+[X] 3.3 Time zone
+[X] 3.4 Locale
 [ ] 3.5 Hostname
 [ ] 3.6 Network configuration
-[ ] 3.7 Initramfs
-[ ] 3.8 Root password
-[ ] 3.9 Boot loader
-[ ] 4 Reboot
+[X] 3.7 Initramfs
+[X] 3.8 Root password
+[X] 3.9 Boot loader
+[X] 4 Reboot
 [ ] 5 Post-installation
 
 ## Installation steps
