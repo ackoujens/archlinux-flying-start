@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Expanding scrollback buffer
-fbcon=scrollback:2024k
+fbcon=scrollback:10000k
 clear
 
 echo '
@@ -183,8 +183,8 @@ echo 'DONE
 echo '
 Changing Root To New System
 ---------------------------'
-curl https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/chroot.sh > /etc/chroot.sh
-chmod +x /etc/chroot.sh
+curl https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/chroot.sh > /mnt/chroot.sh
+chmod +x /mnt/chroot.sh
 arch-chroot /mnt /bin/bash -c "./chroot.sh"
 echo 'DONE
 '
