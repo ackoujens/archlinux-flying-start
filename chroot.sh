@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Expanding scrollback buffer
-fbcon=scrollback:20000k
-
 echo '
 Setting Keyboard Layout
 -----------------------'
@@ -91,26 +88,26 @@ echo "127.0.0.1	localhost.localdomain	localhost	 shack
 echo 'DONE
 '
 
-echo '
-Initramfs
----------'
-mkinitcpio -p linux
-echo 'DONE
-'
-
-echo '
-Root Password
--------------'
-#passwd
-echo 'SKIPPED
-'
-
-echo '
-Boot Loader
------------'
-pacman -S --noconfirm grub
-grub-install --target=i386-pc /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
-echo 'DONE
-'
+# echo '
+# Initramfs
+# ---------'
+# mkinitcpio -p linux
+# echo 'DONE
+# '
+#
+# echo '
+# Root Password
+# -------------'
+# #passwd
+# echo 'SKIPPED
+# '
+#
+# echo '
+# Boot Loader
+# -----------'
+# pacman -S --noconfirm grub
+# grub-install --target=i386-pc /dev/sda
+# grub-mkconfig -o /boot/grub/grub.cfg
+# echo 'DONE
+# '
 #exit
