@@ -57,7 +57,7 @@ echo '
 echo '
 Repartitioning Drive
 --------------------'
-#uservolume="/dev/sda"
+##uservolume="/dev/sda"
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | sudo fdisk $uservolume
   o # clear the in memory partition table
   n # new partition
@@ -142,8 +142,8 @@ echo 'DONE
 echo '
 Cleanup
 -------'
-rm /etc/chroot.sh
-umount -R /mnt
+#rm /etc/chroot.sh
+#umount -R /mnt
 echo 'SKIPPED
 # '
 
@@ -152,4 +152,4 @@ set +x
 
 echo "
 +++ That's all folks! Enjoy! +++"
-reboot
+#reboot
