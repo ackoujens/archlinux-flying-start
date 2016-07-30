@@ -81,6 +81,9 @@ echo '
 Hostname
 --------'
 #/etc/hosts
+echo 'shack' > /etc/hostname
+echo "127.0.0.1	localhost.localdomain	localhost	 shack
+::1		localhost.localdomain	localhost	 shack" > /etc/hosts
 echo 'DONE
 '
 
