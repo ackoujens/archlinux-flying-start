@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Expanding scrollback buffer
+fbcon=scrollback:20000k
+
 echo '
 Setting Keyboard Layout
 -----------------------'
