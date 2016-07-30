@@ -46,6 +46,7 @@ SkipNoCarrier=yes" > /etc/netctl/home
 netctl stop-all
 netctl start home
 netctl enable home
+ip link set ${INTERFACE} up
 echo 'DONE
 '
 
