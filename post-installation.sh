@@ -62,6 +62,7 @@ echo 'DONE
 echo '
 Setting Time Zone
 -----------------'
+rm /etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
 hwclock --systohc --utc
 echo 'DONE

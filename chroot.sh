@@ -3,7 +3,8 @@
 echo '
 Injecting Post-Installation
 ---------------------------'
-sh -c 'echo "#!/bin/bash \nclear \nbash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/post-installation.sh)" > post-installation.sh'
+curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/post-installation.sh > /etc/profile.d/post-installation.sh
+chmod +x /etc/profile.d/post-installation.sh
 echo 'DONE
 '
 
@@ -27,7 +28,7 @@ echo 'DONE
 echo '
 Root Password
 -------------'
-#passwd
+passwd
 echo 'SKIPPED
 '
 

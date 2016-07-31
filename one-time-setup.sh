@@ -149,4 +149,4 @@ set +x
 
 echo "
 +++ That's all folks! Enjoy! +++"
-#reboot
+reboot

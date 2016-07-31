@@ -119,7 +119,7 @@ then
 else
   cd ~/customiso/arch/x86_64/squashfs-root/etc/profile.d
   sudo chmod +x one-time-setup.sh
-  cd ~/customiso/arch/i686/squashfs-root/etc/profile.d/
+  cd ~/customiso/arch/i686/squashfs-root/etc/profile.d
   sudo sh -c 'echo "#!/bin/bash \nclear \nbash <(curl -s https://raw.githubusercontent.com/ackoujens/archlinux-flying-start-install-script/master/one-time-setup.sh)" > one-time-setup.sh'
   sudo chmod +x one-time-setup.sh
 fi
